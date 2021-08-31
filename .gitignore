@@ -1,7 +1,10 @@
 # Folders
 .venv
 .vscode
+.pytest_cache
+*.egg-info
 **/__pycache__
+dist
 
 # Files
 .env*
