@@ -1,0 +1,7 @@
+[flake8]
+max-line-length = 88
+select = C,E,F,W,B,B9
+show-source = true
+statistics = true
+
+exclude = .git,.venv,__init__.py

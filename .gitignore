@@ -1,0 +1,8 @@
+# Folders
+.venv
+.vscode
+**/__pycache__
+
+# Files
+.env*
+!.env.example
