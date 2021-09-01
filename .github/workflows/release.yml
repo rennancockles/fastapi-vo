@@ -38,13 +38,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Get the version
-      run: echo ::set-env name=VERSION::${GITHUB_REF#refs/tags/}
-
     - name: Create release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ env.VERSION }}
-        release_name: ${{ env.VERSION }}
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
