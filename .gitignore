@@ -9,3 +9,5 @@ dist
 # Files
 .env*
 !.env.example
+.coverage
+coverage.xml
