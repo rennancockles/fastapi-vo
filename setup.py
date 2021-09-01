@@ -1,21 +1,20 @@
-from setuptools import setup, find_packages
+from setuptools import setup
+from fastapi_vo import __version__
 
-VERSION = "0.0.1"
 
 setup(
     name="fastapi-vo",
-    version=VERSION,
+    version=__version__,
+    url="https://github.com/rennancockles/fastapi-vo",
+    license="MIT",
     author="Rennan Cockles",
     author_email="rcdev@hotmail.com.br",
-    packages=find_packages(exclude=("tests.*", "tests")),
-    url="https://github.com/rennancockles/fastapi-vo",
-    documentation="",
-    license="MIT",
     description="Utilities to simplify FastAPI view objects",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    install_requires=["fastapi"],
+    packages=["fastapi_vo"],
     python_requires=">=3.6",
+    install_requires=["fastapi"],
     keywords=["fastapi", "view objects", "model"],
     classifiers=[
         "Operating System :: OS Independent",
