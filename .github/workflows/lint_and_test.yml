@@ -1,9 +1,10 @@
-name: Pytest
+name: Lint and Test
 
 on: push
 
 jobs:
   test:
+    name: Lint and Test
     runs-on: ubuntu-latest
 
     strategy:
