@@ -11,12 +11,13 @@ app = FastAPI()
 class User(BaseModel):
     username: str
     password: str
-    is_active: bool
+    is_active: bool = True
     is_admin: Optional[bool] = False
 
 
 NoPass = Omit(User, "password", classname="NoPass")
 OnlyPass = Pick(User, "password", classname="OnlyPass")
+Auth = Pick(User, ("username", "password"), classname="Auth")
 
 
 users = [
@@ -48,6 +49,11 @@ async def get_user(user_id: int):
     return None
 
 
+@app.post("/", response_model=User)
+async def post_user(user: User):
+    return user
+
+
 # Omit
 @app.get("/omit/", response_model=List[NoPass])
 async def list_omit_users():
@@ -61,6 +67,11 @@ async def get_omit_user(user_id: int):
     return None
 
 
+@app.post("/omit/", response_model=NoPass)
+async def post_omit_user(user: NoPass):
+    return user
+
+
 # Pick
 @app.get("/pick/", response_model=List[OnlyPass])
 async def list_pick_users():
@@ -72,3 +83,14 @@ async def get_pick_user(user_id: int):
     if 0 < user_id <= len(users):
         return users[user_id - 1]
     return None
+
+
+@app.post("/pick/", response_model=OnlyPass)
+async def post_pick_user(user: OnlyPass):
+    return user
+
+
+# Mixed
+@app.post("/mixed/", response_model=NoPass)
+async def post_mixed(user: Auth):
+    return user
