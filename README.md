@@ -25,7 +25,7 @@
 
 ---
 
-FastAPI-VO is a library for creating simple <a href="https://pydantic-docs.helpmanual.io/" class="external-link" target="_blank">FastAPI</a> view objects just by `picking` or `omitting` parts of a model. It is designed to be simple, intuitive and easy to use.
+FastAPI-VO is a lightweight library for creating simple <a href="https://pydantic-docs.helpmanual.io/" class="external-link" target="_blank">FastAPI</a> view objects just by `picking` or `omitting` parts of a model. It is designed to be simple, intuitive and easy to use.
 
 It is so simple that doesn't need much explanation. Just check some examples below.
 
@@ -253,9 +253,7 @@ async def get_user():
 
 ### Picking a field
 
-Now let's create a login route with another variation of the user model by picking some fields
-
-Check the examples below.
+Now let's create a login route with another variation of the user model by picking some fields.
 
 
 ```Python hl_lines="5 15 43-46"
