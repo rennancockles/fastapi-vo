@@ -1,10 +1,15 @@
+import re
+from pathlib import Path
+
 from setuptools import setup
-from fastapi_vo import __version__
+
+with open(Path("fastapi_vo") / "__init__.py", encoding="utf-8") as fh:
+    version = re.search(r'__version__ = "(.*?)"', fh.read(), re.M).group(1)
 
 
 setup(
     name="fastapi-vo",
-    version=__version__,
+    version=version,
     url="https://github.com/rennancockles/fastapi-vo",
     license="MIT",
     author="Rennan Cockles",
