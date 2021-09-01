@@ -8,9 +8,13 @@ with open(Path("fastapi_vo") / "__init__.py", encoding="utf-8") as fh:
 
 
 setup(
-    name="fastapi-vo",
+    name="FastAPI-VO",
     version=version,
     url="https://github.com/rennancockles/fastapi-vo",
+    project_urls={
+        "Code": "https://github.com/rennancockles/fastapi-vo",
+        "Issue tracker": "https://github.com/rennancockles/fastapi-vo/issues",
+    },
     license="MIT",
     author="Rennan Cockles",
     author_email="rcdev@hotmail.com.br",
