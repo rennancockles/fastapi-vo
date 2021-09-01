@@ -3,5 +3,6 @@ max-line-length = 88
 select = C,E,F,W,B,B9
 show-source = true
 statistics = true
+count = true
 
 exclude = .git,.venv,__init__.py
