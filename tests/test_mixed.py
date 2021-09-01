@@ -7,6 +7,5 @@ def test_mixed_post(client):
     assert response.status_code == 200
     assert response.json() == {
         "username": "foo",
-        "is_active": True,
         "is_admin": False,
     }

@@ -16,6 +16,7 @@ class User(BaseModel):
 
 
 NoPass = Omit(User, "password", classname="NoPass")
+UserAdmin = Omit(User, ["password", "is_active"], classname="UserAdmin")
 OnlyPass = Pick(User, "password", classname="OnlyPass")
 Auth = Pick(User, ("username", "password"), classname="Auth")
 
@@ -91,6 +92,6 @@ async def post_pick_user(user: OnlyPass):
 
 
 # Mixed
-@app.post("/mixed/", response_model=NoPass)
+@app.post("/mixed/", response_model=UserAdmin)
 async def post_mixed(user: Auth):
     return user
