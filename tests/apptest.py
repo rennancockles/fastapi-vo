@@ -1,9 +1,9 @@
-from typing import List, Optional
+from typing import Any, List, Optional
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 from fastapi_vo import Omit, Pick
-
 
 app = FastAPI()
 
@@ -15,10 +15,10 @@ class User(BaseModel):
     is_admin: Optional[bool] = False
 
 
-NoPass = Omit(User, "password", classname="NoPass")
-UserAdmin = Omit(User, ["password", "is_active"], classname="UserAdmin")
-OnlyPass = Pick(User, "password", classname="OnlyPass")
-Auth = Pick(User, ("username", "password"), classname="Auth")
+NoPass: Any = Omit(User, "password", classname="NoPass")
+UserAdmin: Any = Omit(User, ["password", "is_active"], classname="UserAdmin")
+OnlyPass: Any = Pick(User, "password", classname="OnlyPass")
+Auth: Any = Pick(User, ("username", "password"), classname="Auth")
 
 
 users = [
