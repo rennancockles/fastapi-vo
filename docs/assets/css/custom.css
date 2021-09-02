@@ -1,21 +1,20 @@
 [data-md-color-scheme="default"] {
   --md-primary-fg-color:        #4a0682;
-
-  --md-primary-fg-color--light: #fbff00;
-  --md-primary-fg-color--dark:  #33ff00;
   --md-primary-bg-color:        hsla(0, 0%, 100%, 1);
   --md-primary-bg-color--light: hsla(0, 0%, 100%, 0.7);
 
-  --md-accent-fg-color:                #ff5943;
+  --md-accent-fg-color:                #ffb522;
   --md-accent-fg-color--transparent:   #5801342c;
-  --md-accent-bg-color:                rgb(255, 251, 0);
-  --md-accent-bg-color--light:         hsla(180, 100%, 50%, 0.7);
-  /* --md-accent-bg-color:                hsla(0, 0%, 100%, 1);
-  --md-accent-bg-color--light:         hsla(0, 0%, 100%, 0.7); */
 }
 
 [data-md-color-scheme="slate"] {
-  --md-hue: 210; /* [0, 360] */
+  /* --md-hue: 210; [0, 360] */
+  --md-primary-fg-color:        #714099;
+  --md-primary-bg-color:        hsla(0, 0%, 100%, 1);
+  --md-primary-bg-color--light: hsla(0, 0%, 100%, 0.7);
+
+  --md-accent-fg-color:                #ffb522;
+  --md-accent-fg-color--transparent:   #5801342c;
 }
 
 .termynal-comment {
