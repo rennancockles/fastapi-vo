@@ -64,7 +64,7 @@ jobs:
         run: pip install --upgrade pip mkdocs mkdocs-material
 
       - name: Build the documentation
-        run: python mkdocs build
+        run: mkdocs build
 
       - name: Publish the documentation
-        run: python mkdocs gh-deploy --force
+        run: mkdocs gh-deploy --force

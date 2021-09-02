@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://fastapi-vo.r3ck.com.br">
-    <img src="assets/img/banner-bgwhite.png" alt="FastAPI-VO Logo" />
+    <img src="https://fastapi-vo.r3ck.com.br/assets/img/banner-bgwhite.png" alt="FastAPI-VO Logo" />
   </a>
 </p>
 
