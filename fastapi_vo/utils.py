@@ -1,11 +1,11 @@
-from typing import Type, Sequence, Union
+from typing import Sequence, Type, Union
+
 from pydantic import BaseModel
 
 
-def Omit(model: Type[BaseModel],
-         fields: Union[str, Sequence[str]],
-         *,
-         classname: str = None) -> Type[BaseModel]:
+def Omit(
+    model: Type[BaseModel], fields: Union[str, Sequence[str]], *, classname: str = None
+) -> Type[BaseModel]:
     def _format_fields(fields):
         if isinstance(fields, str):
             return set((fields,))
@@ -22,16 +22,15 @@ def Omit(model: Type[BaseModel],
         model_fields.pop(field_name)
 
     dict_ = {
-        '__fields__': model_fields,
+        "__fields__": model_fields,
     }
 
     return type(classname, bases, dict_)
 
 
-def Pick(model: Type[BaseModel],
-         fields: Union[str, Sequence[str]],
-         *,
-         classname: str = None) -> Type[BaseModel]:
+def Pick(
+    model: Type[BaseModel], fields: Union[str, Sequence[str]], *, classname: str = None
+) -> Type[BaseModel]:
     def _format_fields(fields):
         if isinstance(fields, str):
             return set((fields,))
@@ -48,7 +47,7 @@ def Pick(model: Type[BaseModel],
         model_fields[field_name] = model.__fields__[field_name]
 
     dict_ = {
-        '__fields__': model_fields,
+        "__fields__": model_fields,
     }
 
     return type(classname, bases, dict_)

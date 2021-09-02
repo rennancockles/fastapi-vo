@@ -10,38 +10,61 @@ jobs:
     name: Publish to PyPI
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
 
-    - name: Install the dependencies
-      run: pip install --upgrade pip wheel setuptools
+      - name: Install the dependencies
+        run: pip install --upgrade pip wheel setuptools
 
-    - name: Build the distributions
-      run: python setup.py sdist bdist_wheel
+      - name: Build the distributions
+        run: python setup.py sdist bdist_wheel
 
-    - name: Upload to PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.PYPI_TOKEN }}
+      - name: Upload to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
 
-  create-gh-releases-release:
+  create-github-release:
     name: Create Github Release
     runs-on: ubuntu-latest
     env:
       VERSION:
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Create release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      uses: actions/create-release@v1
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+
+  publish-docs:
+    name: Publish Docs
+    runs-on: ubuntu-latest
+    env:
+      VERSION:
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Install the dependencies
+        run: pip install --upgrade pip mkdocs mkdocs-material
+
+      - name: Build the documentation
+        run: python mkdocs build
+
+      - name: Publish the documentation
+        run: python mkdocs gh-deploy --force

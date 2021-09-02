@@ -5,6 +5,7 @@
 *.egg-info
 **/__pycache__
 dist
+docs_build
 
 # Files
 .env*

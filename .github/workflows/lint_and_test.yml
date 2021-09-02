@@ -23,11 +23,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r dev-requirements.txt
 
-      - name: Lint with flake8
+      - name: Black chech
+        run: |
+          black --check --diff --target-version=py36 fastapi_vo tests
+
+      - name: Flake8 check
         run: |
           # stop the build if there are Python syntax errors or undefined names
           # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           flake8 .
+
+      - name: Mypy chech
+        run: |
+          mypy --show-error-codes fastapi_vo tests
+
+      - name: Isort chech
+        run: |
+          isort --check --dif --project=fastapi_vo fastapi_vo tests
 
       - name: Test with pytest
         if: matrix.python-version != 3.9
