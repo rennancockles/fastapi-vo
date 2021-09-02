@@ -4,3 +4,5 @@ requests
 pytest
 pytest-cov
 flake8
+mkdocs
+mkdocs-material

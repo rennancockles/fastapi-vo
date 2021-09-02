@@ -1,0 +1,71 @@
+site_name: FastAPI-VO
+site_description: View objects for FastAPI designed for simplicity.
+site_url: http://fastapi-vo.r3ck.com.br/
+
+repo_name: fastapi-vo
+repo_url: https://github.com/rennancockles/fastapi-vo
+edit_uri: ''
+
+site_dir: docs_build
+
+theme:
+  name: material
+  favicon: assets/img/bolt-color.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github-alt
+  logo: assets/img/bolt.svg
+  language: en
+  features:
+    - search.suggest
+    - search.highlight
+
+nav:
+  - "FastAPI-VO": index.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - admonition
+  - codehilite
+  - extra
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+      - name: mermaid
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_div_format ''
+  - pymdownx.tabbed
+  # - mdx_include
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rennancockles/fastapi-vo
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/rennancockles
+
+extra_css:
+  - assets/css/custom.css
+  - assets/css/termynal.css
+
+extra_javascript:
+  - assets/js/termynal.js
+  - assets/js/custom.js
+#   - https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js
+
