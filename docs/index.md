@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://fastapi-vo.r3ck.com.br">
+  <a href="https://fastapi-vo.r3ck.com.br">
     <img src="assets/img/banner-bgwhite.png" alt="FastAPI-VO Logo" />
   </a>
 </p>
@@ -25,7 +25,7 @@
 
 ---
 
-**Documentation**: <a href="http://fastapi-vo.r3ck.com.br" target="_blank">http://fastapi-vo.r3ck.com.br</a>
+**Documentation**: <a href="https://fastapi-vo.r3ck.com.br" target="_blank">https://fastapi-vo.r3ck.com.br</a>
 
 **Source Code**: <a href="https://github.com/rennancockles/fastapi-vo" target="_blank">https://github.com/rennancockles/fastapi-vo</a>
 

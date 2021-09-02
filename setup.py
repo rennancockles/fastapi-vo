@@ -12,8 +12,8 @@ setup(
     version=version,
     url="https://github.com/rennancockles/fastapi-vo",
     project_urls={
-        "Code": "https://github.com/rennancockles/fastapi-vo",
-        "Issue tracker": "https://github.com/rennancockles/fastapi-vo/issues",
+        "Source Code": "https://github.com/rennancockles/fastapi-vo",
+        "Documentation": "https://fastapi-vo.r3ck.com.br",
     },
     license="MIT",
     author="Rennan Cockles",

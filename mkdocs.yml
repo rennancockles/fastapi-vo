@@ -1,6 +1,6 @@
 site_name: FastAPI-VO
 site_description: View objects for FastAPI designed for simplicity.
-site_url: http://fastapi-vo.r3ck.com.br/
+site_url: https://fastapi-vo.r3ck.com.br/
 
 repo_name: fastapi-vo
 repo_url: https://github.com/rennancockles/fastapi-vo
