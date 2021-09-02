@@ -1,4 +1,8 @@
-# FastAPI View Objects
+<p align="center">
+  <a href="http://fastapi-vo.r3ck.com.br">
+    <img src="assets/img/banner-bgwhite.png" alt="FastAPI-VO Logo" />
+  </a>
+</p>
 
 <p align="center">
     <em>FastAPI-VO, view objects for FastAPI designed for simplicity.</em>
@@ -20,6 +24,8 @@
 </p>
 
 ---
+
+**Documentation**: <a href="http://fastapi-vo.r3ck.com.br" target="_blank">http://fastapi-vo.r3ck.com.br</a>
 
 **Source Code**: <a href="https://github.com/rennancockles/fastapi-vo" target="_blank">https://github.com/rennancockles/fastapi-vo</a>
 
@@ -50,7 +56,7 @@ Successfully installed fastapi-vo
 
 ## Example
 
-For an introduction to FastAPI, see the <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI documentation</a>.
+For an introduction to FastAPI, see the <a href="https://fastapi.tiangolo.com/" class="external-link" target="_blank">FastAPI documentation</a>.
 
 Here's a quick example. ✨
 
@@ -113,12 +119,14 @@ async def login(user: Auth):
 ### Create a Model
 
 Let's create a model called `user` with:
+
 * `username`
 * `password`
 * `is_active`
 * `is_admin`
 
-```Python
+
+```Python hl_lines="1 4-8"
 from pydantic import BaseModel
 
 
@@ -135,6 +143,42 @@ johndoe = User(
     is_admin=False,
     is_active=True,
 )
+
+janedoe = User(
+    username="janedoe",
+    password="janeSecret",
+    is_admin=True,
+    is_active=True,
+)
+```
+
+Now we create 2 instances of the **User** model:
+
+
+```Python hl_lines="11-16 18-23"
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    username: str
+    password: str
+    is_active: bool = True
+    is_admin: bool = False
+
+
+johndoe = User(
+    username="johndoe",
+    password="secret",
+    is_admin=False,
+    is_active=True,
+)
+
+janedoe = User(
+    username="janedoe",
+    password="janeSecret",
+    is_admin=True,
+    is_active=True,
+)
 ```
 
 ### Create a Route
@@ -142,7 +186,7 @@ johndoe = User(
 Now we are going to create a FastAPI app with a route to get the user data.
 
 
-```Python hl_lines="1 12 21-23"
+```Python hl_lines="1 26 29-31"
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -154,7 +198,6 @@ class User(BaseModel):
     is_admin: bool = False
 
 
-app = FastAPI()
 johndoe = User(
     username="johndoe",
     password="secret",
@@ -162,20 +205,30 @@ johndoe = User(
     is_active=True,
 )
 
+janedoe = User(
+    username="janedoe",
+    password="janeSecret",
+    is_admin=True,
+    is_active=True,
+)
 
-@app.get("/user/", response_model=User)
-async def get_user():
+app = FastAPI()
+
+
+@app.get("/user/john", response_model=User)
+async def get_john():
     return johndoe
 ```
 
 This way, FastAPI will return all the user data, including the **password**, and it is not a good thing to do.
 
+
 ### Omitting a field
 
-Now let's use the **Omit** function to return everything from the user, **but** the password.
+Now let's use the **Omit** function to return everything from the user **but** the password.
 
 
-```Python hl_lines="4 23"
+```Python hl_lines="4 31"
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -189,7 +242,6 @@ class User(BaseModel):
     is_admin: bool = False
 
 
-app = FastAPI()
 johndoe = User(
     username="johndoe",
     password="secret",
@@ -197,19 +249,27 @@ johndoe = User(
     is_active=True,
 )
 
+janedoe = User(
+    username="janedoe",
+    password="janeSecret",
+    is_admin=True,
+    is_active=True,
+)
 
-@app.get("/user/", response_model=Omit(User, "password"))
-async def get_user():
+app = FastAPI()
+
+
+@app.get("/user/john", response_model=Omit(User, "password"))
+async def get_john():
     return johndoe
 ```
 
 ### Multiple variations of the same model
 
-If you want to use multiple variations of the same class, you have to give it a new `classname` to avoid conflicts. Another approach is to assign the value to a **variable** and reuse it.
+If you want to use multiple variations of the same class, you have to give it a new `classname` to avoid conflicts. Another approach is to assign it to a **variable** for reuse.
 
-Check the examples below.
 
-```Python hl_lines="1 15 24-39"
+```Python hl_lines="1 15 35-37 40"
 from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -226,37 +286,41 @@ class User(BaseModel):
 
 NoPassword = Omit(User, "password", classname="NoPasswordUser")
 
-app = FastAPI()
+
 johndoe = User(
     username="johndoe",
     password="secret",
     is_admin=False,
     is_active=True,
 )
+
 janedoe = User(
     username="janedoe",
-    password="janesecret",
+    password="janeSecret",
     is_admin=True,
     is_active=True,
 )
 
+app = FastAPI()
 
-@app.get("/users/", response_model=List[NoPassword])
+
+@app.get("/users", response_model=List[NoPassword])
 async def list_users():
     return [johndoe, janedoe]
 
 
-@app.get("/users/john/", response_model=NoPassword)
-async def get_user():
+@app.get("/user/john", response_model=NoPassword)
+async def get_john():
     return johndoe
 ```
+
 
 ### Picking a field
 
 Now let's create a login route with another variation of the user model by picking some fields.
 
 
-```Python hl_lines="5 15 43-46"
+```Python hl_lines="5 16 46-50"
 from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -271,39 +335,43 @@ class User(BaseModel):
     is_admin: bool = False
 
 
-Auth = Pick(User, ["username", "password"], classname="Auth")
 NoPassword = Omit(User, "password", classname="NoPasswordUser")
+Auth = Pick(User, ["username", "password"], classname="Auth")
 
-app = FastAPI()
+
 johndoe = User(
     username="johndoe",
     password="secret",
     is_admin=False,
     is_active=True,
 )
+
 janedoe = User(
     username="janedoe",
-    password="janesecret",
+    password="janeSecret",
     is_admin=True,
     is_active=True,
 )
 
+app = FastAPI()
 
-@app.get("/users/", response_model=List[NoPassword])
+
+@app.get("/users", response_model=List[NoPassword])
 async def list_users():
     return [johndoe, janedoe]
 
 
-@app.get("/users/john/", response_model=NoPassword)
-async def get_user():
+@app.get("/user/john", response_model=NoPassword)
+async def get_john():
     return johndoe
 
 
-@app.get("/login/", response_model=NoPassword)
+@app.get("/login", response_model=NoPassword)
 async def login(user: Auth):
     # some authentication logic in here
     return user
 ```
+
 
 ## License
 
